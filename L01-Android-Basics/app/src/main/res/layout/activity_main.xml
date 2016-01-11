@@ -10,6 +10,7 @@
     tools:context="edu.cpp.cs499.androidbasics.MainActivity">
 
     <TextView
+        android:id="@+id/questionTitleTextView"
         android:layout_above="@+id/buttonsContainer"
         android:layout_centerHorizontal="true"
         android:layout_width="wrap_content"
@@ -36,6 +37,14 @@
             android:layout_height="wrap_content" />
 
     </LinearLayout>
+
+    <Button
+        android:layout_below="@+id/buttonsContainer"
+        android:text="Next"
+        android:id="@+id/nextButton"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 
 </RelativeLayout>
