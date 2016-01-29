@@ -5,7 +5,7 @@ android {
     buildToolsVersion "23.0.2"
 
     defaultConfig {
-        applicationId "cs499.cpp.edu.l03_android_widgets"
+        applicationId "cs499.cpp.edu.l04_adapterviews"
         minSdkVersion 21
         targetSdkVersion 23
         versionCode 1
@@ -23,5 +23,4 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.1.1'
-    compile 'com.jakewharton:butterknife:7.0.1'
 }

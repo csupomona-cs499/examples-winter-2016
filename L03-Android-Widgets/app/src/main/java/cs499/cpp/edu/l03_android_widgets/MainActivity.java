@@ -35,8 +35,15 @@ public class MainActivity extends AppCompatActivity {
         demoTextView = (TextView) findViewById(R.id.textViewDemo);
         demoTextView.setText(demoTextView.getText() + " (running)");
 
+        String name = this.getIntent().getStringExtra("name");
+
         demoEditText = (EditText) findViewById(R.id.demoEditText);
-        demoEditText.setText("Please Write st.");
+        if (name == null) {
+            demoEditText.setText("Please Write st.");
+        } else {
+            demoEditText.setText(name);
+        }
+
 
         passwordEditText = (EditText) findViewById(R.id.demoEditText2);
         passwordEditText.addTextChangedListener(new TextWatcher() {
