@@ -17,7 +17,10 @@ app.get('/list/students', function (req, res) {
     students.push(stu);
   }
 
-  res.send(students);  
+  setTimeout(function() {
+    res.send(students);  
+  }, 3000);
+
 });
 
 app.listen(3000, function () {
