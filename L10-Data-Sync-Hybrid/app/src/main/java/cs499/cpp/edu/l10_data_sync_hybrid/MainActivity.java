@@ -1,6 +1,10 @@
 package cs499.cpp.edu.l10_data_sync_hybrid;
 
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -37,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://0cc64225.ngrok.io/")
+                .baseUrl("http://bb96235b.ngrok.io")
                 .addConverterFactory(JacksonConverterFactory.create())
                 .build();
 
@@ -45,6 +49,14 @@ public class MainActivity extends AppCompatActivity {
 
         loadStudentLocally();
         loadStudentRemotely();
+
+        BroadcastReceiver syncDataReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                loadStudentRemotely();
+            }
+        };
+        this.registerReceiver(syncDataReceiver, new IntentFilter("sync-now"));
     }
 
     private void loadStudentLocally() {
@@ -64,9 +76,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loadStudentRemotely() {
-//        progressDialog = ProgressDialog.show(this, "Please Wait",
-//                "Getting the list of students ...", true);
-//        progressDialog.show();
+        progressDialog = ProgressDialog.show(this, "Please Wait",
+                "Getting the list of students ...", true);
+        progressDialog.show();
 
         Call<List<Student>> call = studentServiceAPI.getStudentList();
         call.enqueue(new Callback<List<Student>>() {
@@ -77,13 +89,13 @@ public class MainActivity extends AppCompatActivity {
                         MainActivity.this, android.R.layout.simple_list_item_1, studentsList);
                 listView.setAdapter(studentArrayAdapter);
                 persistStudentList(studentsList);
-                //progressDialog.dismiss();
+                progressDialog.dismiss();
             }
 
             @Override
             public void onFailure(Call<List<Student>> call, Throwable t) {
                 Log.e("TEST", "Failed to get the list.", t);
-                //progressDialog.dismiss();
+                progressDialog.dismiss();
             }
         });
     }
@@ -99,4 +111,7 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
+
+
 }

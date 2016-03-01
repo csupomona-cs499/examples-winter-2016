@@ -38,7 +38,7 @@ public class FriendActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_main);
-
+        
         listView = (ListView) findViewById(R.id.listView);
         friendAdapter = new FriendAdapter(this, R.layout.friend_list_item, friendList);
         listView.setAdapter(friendAdapter);
